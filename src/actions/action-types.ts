@@ -1,5 +1,5 @@
 import {Action} from 'redux'
-import {User} from '../users/user'
+import {Recipe} from '../interfaces/recipe'
 
 export enum ActionTypes {
     FetchUsers = 'FetchUsers',
@@ -13,7 +13,7 @@ export interface FetchUsersAction extends Action {
 
 export interface FetchUsersOkAction extends Action {
     type: typeof ActionTypes.FetchUsersOk
-    payload: User[]
+    payload: Recipe[]
 }
 
 

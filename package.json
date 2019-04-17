@@ -7,6 +7,7 @@
     "@types/node": "11.13.0",
     "@types/react": "16.8.12",
     "@types/react-dom": "16.8.3",
+    "@types/styled-components": "^4.1.14",
     "dotenv": "^7.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -34,7 +35,10 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@types/enzyme": "^3.9.1",
     "@types/react-redux": "^7.0.6",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "redux-devtools-extension": "^2.13.8"
   }
 }

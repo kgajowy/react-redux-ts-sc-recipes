@@ -2,10 +2,10 @@ import {ThunkDispatch} from 'redux-thunk'
 import {ThunkResult} from '../interfaces/thunk'
 import {RootState} from '../reducers'
 import {getUsers} from '../services/users.service'
-import {User} from '../users/user'
+import {Recipe} from '../interfaces/recipe'
 import {ActionTypes, FetchUsersErrorAction, FetchUsersOkAction, UsersActions} from './action-types'
 
-const fetchUsersOk = (payload: User[]): FetchUsersOkAction => ({
+const fetchUsersOk = (payload: Recipe[]): FetchUsersOkAction => ({
     type: ActionTypes.FetchUsersOk,
     payload
 })

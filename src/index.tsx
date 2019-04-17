@@ -2,16 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 import App from './App'
 import './index.css'
 import {RootState} from './reducers'
-import usersReducer from './reducers/users.reducer'
+import recipesReducer from './reducers/recipes.reducer'
 import * as serviceWorker from './serviceWorker'
-import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers<RootState>({
-    users: usersReducer
+    recipes: recipesReducer
 })
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 

@@ -1,5 +1,5 @@
-import {UsersState} from './users.reducer'
+import {RecipesState} from './recipes.reducer'
 
 export interface RootState {
-    users: UsersState,
+    recipes: RecipesState,
 }
