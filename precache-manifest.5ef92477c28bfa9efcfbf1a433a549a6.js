@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/react-redux-ts-sc-recipes/static/js/runtime~main.4f7676cd.js"
   },
   {
-    "revision": "bce4e2dff9bc0ecaa48f",
-    "url": "/react-redux-ts-sc-recipes/static/js/main.7cbf7def.chunk.js"
+    "revision": "d90278b3611da979079d",
+    "url": "/react-redux-ts-sc-recipes/static/js/main.d2bf0294.chunk.js"
   },
   {
-    "revision": "6d6d72bb9564573b2d7c",
-    "url": "/react-redux-ts-sc-recipes/static/js/2.b5ec8962.chunk.js"
+    "revision": "c4e972ce3a47a4eb9164",
+    "url": "/react-redux-ts-sc-recipes/static/js/2.be282e25.chunk.js"
   },
   {
-    "revision": "bce4e2dff9bc0ecaa48f",
+    "revision": "d90278b3611da979079d",
     "url": "/react-redux-ts-sc-recipes/static/css/main.84e532fe.chunk.css"
   },
   {
-    "revision": "be4a3f3a67bcffc3b6ca999a9a66be03",
+    "revision": "d84da5c746038c5238ad555af56799ba",
     "url": "/react-redux-ts-sc-recipes/index.html"
   }
 ];
