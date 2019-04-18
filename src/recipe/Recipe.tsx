@@ -25,3 +25,8 @@ const List = styled.div`
 `
 
 export default Recipe
+
+// TODO adding new Ingredient
+// TODO add ingredient removal button as standalone component
+// TODO add/remove recipe
+// TODO RWD

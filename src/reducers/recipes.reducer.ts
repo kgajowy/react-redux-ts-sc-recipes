@@ -1,4 +1,4 @@
-import {ActionTypes, UsersActions} from '../actions/action-types'
+import {RecipeActions} from '../actions/action-types'
 import {Recipe} from '../interfaces/recipe'
 
 export interface RecipesState {
@@ -8,18 +8,23 @@ export interface RecipesState {
 }
 
 export const defaultState: RecipesState = {
-    recipes: [],
+    recipes: [{
+        id: 0,
+        name: 'pomidorowa',
+        ingredients: [{
+            name: 'pomidory',
+            required: true,
+            id: 0,
+        }, {
+            name: 'pieprz',
+            id: 1,
+        }]
+    }],
     pending: false,
 }
 
-const recipesReducer = (state: RecipesState = defaultState, action: UsersActions): RecipesState => {
+const recipesReducer = (state: RecipesState = defaultState, action: RecipeActions): RecipesState => {
     switch (action.type) {
-        case ActionTypes.FetchUsers:
-            return {...state, pending: true, error: undefined}
-        case ActionTypes.FetchUsersOk:
-            return {...state, pending: false, recipes: action.payload}
-        case ActionTypes.FetchUsersError:
-            return {...state, pending: false, error: action.payload}
         default:
             return state
     }
