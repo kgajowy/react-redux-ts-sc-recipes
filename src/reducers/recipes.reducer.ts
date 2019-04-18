@@ -19,6 +19,18 @@ export const defaultState: RecipesState = {
             name: 'pieprz',
             id: 1,
         }]
+    }, {
+        id: 1,
+        name: 'Drugie Danie Prawdziwego Polaka',
+        ingredients: [{
+            name: 'schabowy',
+            required: true,
+            id: 2,
+        }, {
+            name: 'ziemniaki',
+            required: true,
+            id: 3,
+        }]
     }],
     pending: false,
 }
