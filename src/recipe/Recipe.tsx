@@ -54,7 +54,8 @@ const Name = styled(Input)`
 
 export default Recipe
 
+// TODO recipe - reducer
+// TODO add/remove recipe
 // TODO adding new Ingredient
 // TODO add ingredient removal button as standalone component
-// TODO add/remove recipe
 // TODO RWD

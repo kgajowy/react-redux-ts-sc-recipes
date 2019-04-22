@@ -1,4 +1,4 @@
-import {RecipeActions} from '../actions/action-types'
+import {ActionTypes, RecipeActions} from '../actions/action-types'
 import {Recipe} from '../interfaces/recipe'
 
 export interface RecipesState {
@@ -8,35 +8,14 @@ export interface RecipesState {
 }
 
 export const defaultState: RecipesState = {
-    recipes: [{
-        id: 0,
-        name: 'pomidorowa',
-        ingredients: [{
-            name: 'pomidory',
-            required: true,
-            id: 0,
-        }, {
-            name: 'pieprz',
-            id: 1,
-        }]
-    }, {
-        id: 1,
-        name: 'Drugie Danie Prawdziwego Polaka',
-        ingredients: [{
-            name: 'schabowy',
-            required: true,
-            id: 2,
-        }, {
-            name: 'ziemniaki',
-            required: true,
-            id: 3,
-        }]
-    }],
+    recipes: [],
     pending: false,
 }
 
 const recipesReducer = (state: RecipesState = defaultState, action: RecipeActions): RecipesState => {
     switch (action.type) {
+        case ActionTypes.GetRecipesOk:
+            return {...state, recipes: action.payload}
         default:
             return state
     }
