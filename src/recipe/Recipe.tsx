@@ -2,6 +2,7 @@ import debounce from 'lodash-es/debounce'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Input} from '../components'
+import {Remove} from '../components/remove/Remove'
 import Ingredient from '../ingredient/Ingredient'
 import {Ingredient as IngredientType} from '../interfaces/ingredient'
 import {Recipe as RecipeProps} from '../interfaces/recipe'
@@ -9,9 +10,10 @@ import {Recipe as RecipeProps} from '../interfaces/recipe'
 interface Props {
     recipe: RecipeProps
     onChange: (recipe: RecipeProps) => any
+    removeElement: React.ReactNode
 }
 
-const Recipe: React.FunctionComponent<Props> = ({onChange, recipe}) => {
+const Recipe: React.FunctionComponent<Props> = ({onChange, recipe, removeElement}) => {
     const ingredientChange = (ingredient: IngredientType) => {
         console.log(ingredient, `ingredientChange`)
     }
@@ -27,12 +29,11 @@ const Recipe: React.FunctionComponent<Props> = ({onChange, recipe}) => {
         memoDebounce(recipe)
     }, [recipeName])
 
-
     const localChange = (e: React.ChangeEvent<HTMLInputElement>) => changeRecipeName(e.target.value)
 
     return (
         <div>
-            <Name value={recipeName} onChange={localChange}/>
+            <Name value={recipeName} onChange={localChange}/>{removeElement}
             <List>
                 {recipe.ingredients.map((ing) =>
                     <Ingredient key={ing.id} ingredient={ing} onChange={ingredientChange}/>)}
@@ -54,8 +55,7 @@ const Name = styled(Input)`
 
 export default Recipe
 
-// TODO recipe - reducer
-// TODO add/remove recipe
+// TODO add recipe
 // TODO adding new Ingredient
 // TODO add ingredient removal button as standalone component
 // TODO RWD

@@ -19,3 +19,8 @@ export const storeRecipes = (recipes: Recipe[]): Promise<boolean> => {
         return Promise.resolve(false)
     }
 }
+
+export const removeRecipe = (allRecipes: Recipe[], recipe: Recipe): Promise<boolean> => {
+    const afterChanges = allRecipes.filter(r => r.id !== recipe.id)
+    return storeRecipes(afterChanges)
+}
