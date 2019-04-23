@@ -2,7 +2,7 @@ import {ThunkDispatch} from 'redux-thunk'
 import {Recipe} from '../interfaces/recipe'
 import {ThunkResult} from '../interfaces/thunk'
 import {RootState} from '../reducers'
-import {getRecipes, removeRecipe, storeRecipes, submitRecipe} from '../services/recipe.service'
+import {getRecipes, removeRecipe, submitRecipe, updateRecipe} from '../services/recipe.service'
 import {
     ActionErrorType,
     ActionSuccessType,
@@ -54,22 +54,10 @@ export const fetchRecipes = (): ThunkResult<Promise<RecipeActions>> => (
 
 export const editRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
     (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
-        // a coincidence makes it that edit/save action and code in reducer are very similar
-        // normally, API call makes those different and there is no need to care about DRY we created there
-        // thus, we could optimise it for calling `recipeAdded` with all recipes to just replace them within reducer
-        // as we have IDs, key=... is fine. However, not doing that for demonstration purposes and possibility to
-        // replace localStorage with different Strategy
-        // TODO consider moving this logic into Service to keep implementation details hidden from our flow
         const recipes = getState().recipes.recipes
-        const target = recipes.findIndex(r => r.id === recipe.id)
-        if (target === -1) {
-            dispatch(error(ActionTypes.SaveRecipeError, new Error('Recipe not found.')))
-        } else {
-            recipes[target] = recipe
-        }
-        return storeRecipes(recipes)
-            .then(() => dispatch(success(ActionTypes.SaveRecipeOk, 'Recipe saved.')))
+        return updateRecipe(recipes, recipe)
             .then(() => dispatch(recipeSaved(recipe)))
+            .then(() => dispatch(success(ActionTypes.SaveRecipeOk, 'Recipe saved.')))
             .catch(() => dispatch(error(ActionTypes.SaveRecipeError, new Error('Could not save the recipe.'))))
     }
 )
@@ -77,10 +65,8 @@ export const editRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> 
 export const addRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
     (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
         const recipes = getState().recipes.recipes
-
-        return submitRecipe(recipe)
+        return submitRecipe(recipes, recipe)
             .then(r => dispatch(recipeAdded(r)))
-            .then(() => storeRecipes([recipe, ...recipes]))
             .then(() => dispatch(success(ActionTypes.AddRecipeOk, 'Recipe added.')))
             .catch(() => dispatch(error(ActionTypes.SaveRecipeError, new Error('Could not save the recipe.'))))
     }
@@ -90,8 +76,8 @@ export const deleteRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>
     (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
         const recipes = getState().recipes.recipes
         return removeRecipe(recipes, recipe)
-            .then(() => dispatch(success(ActionTypes.DeleteRecipeOk, 'Recipe removed.')))
             .then(() => dispatch(recipeDeleted(recipe)))
+            .then(() => dispatch(success(ActionTypes.DeleteRecipeOk, 'Recipe removed.')))
             .catch(() => dispatch(error(ActionTypes.DeleteRecipeError, new Error('Could not remove the recipe.'))))
     }
 )

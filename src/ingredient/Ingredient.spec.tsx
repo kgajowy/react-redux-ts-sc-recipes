@@ -1,6 +1,6 @@
 import {shallow, ShallowWrapper} from 'enzyme'
 import React from 'react'
-import {Checkbox, Input} from '../components'
+import {Checkbox, InputUi} from '../components'
 import {Ingredient as IngredientType} from '../interfaces/ingredient'
 import Ingredient from './Ingredient'
 
@@ -31,8 +31,8 @@ describe('MyComponent', () => {
         })
 
         it(`should contain Ingredient name`, () => {
-            expect(component.find(Input).length).toEqual(1)
-            expect(component.find(Input).get(0).props.value).toEqual(ingredient.name)
+            expect(component.find(InputUi).length).toEqual(1)
+            expect(component.find(InputUi).get(0).props.value).toEqual(ingredient.name)
         })
 
         it(`should have unchecked input if not required`, () => {
@@ -49,7 +49,7 @@ describe('MyComponent', () => {
             const newName = 'Ramen'
             beforeEach(() => {
                 onChange.mockReset()
-                component.find(Input).simulate('change', {target: {value: newName}})
+                component.find(InputUi).simulate('change', {target: {value: newName}})
             })
 
             it(`should trigger onChange`, () => {
@@ -57,7 +57,7 @@ describe('MyComponent', () => {
             })
 
             it(`should change the name`, () => {
-                expect(component.find(Input).get(0).props.value).toEqual(newName)
+                expect(component.find(InputUi).get(0).props.value).toEqual(newName)
             })
         })
         describe(`when toggling required flag`, () => {

@@ -20,6 +20,12 @@ const recipesReducer = (state: RecipesState = defaultState, action: RecipeAction
             return {...state, recipes: state.recipes.filter(r => r.id !== action.payload.id)}
         case ActionTypes.AddRecipe:
             return {...state, recipes: [action.payload, ...state.recipes]}
+        case ActionTypes.SaveRecipe: {
+            const i = state.recipes.findIndex(r => r.id === action.payload.id)
+            return {
+                ...state, recipes: state.recipes.map((r, idx) => idx === i ? action.payload : r)
+            }
+        }
         default:
             return state
     }

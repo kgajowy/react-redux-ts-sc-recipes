@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Input = styled.input`
+export const InputUi = styled.input`
     width: 200px;
     height: 1rem;
     color: #455A64;

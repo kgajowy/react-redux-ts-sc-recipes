@@ -25,7 +25,19 @@ export const removeRecipe = (allRecipes: Recipe[], recipe: Recipe): Promise<bool
     return storeRecipes(afterChanges)
 }
 
-export const submitRecipe = async (recipe: Recipe): Promise<Recipe> => {
+export const submitRecipe = async (allRecipes: Recipe[], recipe: Recipe): Promise<Recipe> => {
     recipe.id = new Date().getTime()
-    return recipe
+    return storeRecipes([recipe, ...allRecipes]).then(() => {
+        return recipe
+    })
+}
+
+export const updateRecipe = async (allRecipes: Recipe[], recipe: Recipe): Promise<boolean> => {
+    const target = allRecipes.findIndex(r => r.id === recipe.id)
+    if (target === -1) {
+        throw new Error('Recipe not found.')
+    } else {
+        allRecipes[target] = recipe
+    }
+    return storeRecipes(allRecipes)
 }
