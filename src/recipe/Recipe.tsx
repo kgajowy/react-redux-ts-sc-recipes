@@ -1,7 +1,7 @@
-import debounce from 'lodash-es/debounce'
-import React, {useCallback, useEffect, useRef, useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {InputUi} from '../components'
+import {Input} from '../components/input/Input'
 import Ingredient from '../ingredient/Ingredient'
 import {NewIngredient} from '../ingredient/NewIngredient'
 import {Ingredient as IngredientType} from '../interfaces/ingredient'
@@ -21,23 +21,14 @@ const Recipe: React.FunctionComponent<Props> = ({onChange, recipe, removeElement
         recipe.ingredients.push(ingredient)
         onChange(recipe)
     }
-    const [recipeName, changeRecipeName] = useState(recipe.name)
-    const recipeRef = useRef(null)
-    const memoDebounce = useCallback(debounce(onChange, 2000), [recipeRef])
-
-    useEffect(() => {
-        if (recipeName === recipe.name) {   // prevent first trigger after initial render
-            return
-        }
-        recipe.name = recipeName
-        memoDebounce(recipe)
-    }, [recipeName])
-
-    const localChange = (e: React.ChangeEvent<HTMLInputElement>) => changeRecipeName(e.target.value)
+    const onSubmit = (value: string) => {
+        recipe.name = value
+        onChange(recipe)
+    }
 
     return (
         <div>
-            <Name value={recipeName} onChange={localChange}/>{removeElement}
+            <Input onSubmit={onSubmit} defaultValue={recipe.name} autoSave/>{removeElement}
             <List>
                 <NewIngredient add={ingredientAdded}/>
                 {recipe.ingredients.map((ing) =>
