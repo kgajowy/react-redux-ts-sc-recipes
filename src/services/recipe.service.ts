@@ -24,3 +24,8 @@ export const removeRecipe = (allRecipes: Recipe[], recipe: Recipe): Promise<bool
     const afterChanges = allRecipes.filter(r => r.id !== recipe.id)
     return storeRecipes(afterChanges)
 }
+
+export const submitRecipe = async (recipe: Recipe): Promise<Recipe> => {
+    recipe.id = new Date().getTime()
+    return recipe
+}

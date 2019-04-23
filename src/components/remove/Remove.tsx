@@ -3,14 +3,20 @@ import {HTMLAttributes} from 'react'
 import styled from 'styled-components'
 
 export const Remove: React.FunctionComponent<HTMLAttributes<HTMLSpanElement>> = (props) => (
-    <Image {...props}>❌</Image>
+    <Cross {...props}>❌</Cross>
     /*
      <Image src={deleteIcon} alt={'Remove'} {...props} width={32} height={32}/>
      */
 )
 
-const Image = styled.span`
+const Cross = styled.span`
     cursor: pointer;
     padding: 10px;
     vertical-align: super;
+    color: transparent;
+    text-shadow:  0 0 0 white;
+    
+    &:hover {
+      text-shadow: 0 0 0 red;
+    }
 `

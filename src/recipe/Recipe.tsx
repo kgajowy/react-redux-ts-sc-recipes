@@ -2,7 +2,6 @@ import debounce from 'lodash-es/debounce'
 import React, {useCallback, useEffect, useRef, useState} from 'react'
 import styled from 'styled-components'
 import {Input} from '../components'
-import {Remove} from '../components/remove/Remove'
 import Ingredient from '../ingredient/Ingredient'
 import {Ingredient as IngredientType} from '../interfaces/ingredient'
 import {Recipe as RecipeProps} from '../interfaces/recipe'
@@ -10,7 +9,7 @@ import {Recipe as RecipeProps} from '../interfaces/recipe'
 interface Props {
     recipe: RecipeProps
     onChange: (recipe: RecipeProps) => any
-    removeElement: React.ReactNode
+    removeElement?: React.ReactNode
 }
 
 const Recipe: React.FunctionComponent<Props> = ({onChange, recipe, removeElement}) => {

@@ -18,6 +18,8 @@ const recipesReducer = (state: RecipesState = defaultState, action: RecipeAction
             return {...state, recipes: action.payload}
         case ActionTypes.DeleteRecipe:
             return {...state, recipes: state.recipes.filter(r => r.id !== action.payload.id)}
+        case ActionTypes.AddRecipe:
+            return {...state, recipes: [action.payload, ...state.recipes]}
         default:
             return state
     }

@@ -2,7 +2,7 @@ import {ThunkDispatch} from 'redux-thunk'
 import {Recipe} from '../interfaces/recipe'
 import {ThunkResult} from '../interfaces/thunk'
 import {RootState} from '../reducers'
-import {getRecipes, removeRecipe, storeRecipes} from '../services/recipe.service'
+import {getRecipes, removeRecipe, storeRecipes, submitRecipe} from '../services/recipe.service'
 import {
     ActionErrorType,
     ActionSuccessType,
@@ -77,9 +77,11 @@ export const editRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> 
 export const addRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
     (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
         const recipes = getState().recipes.recipes
-        return storeRecipes([...recipes, recipe])
+
+        return submitRecipe(recipe)
+            .then(r => dispatch(recipeAdded(r)))
+            .then(() => storeRecipes([recipe, ...recipes]))
             .then(() => dispatch(success(ActionTypes.AddRecipeOk, 'Recipe added.')))
-            .then(() => dispatch(recipeAdded(recipe)))
             .catch(() => dispatch(error(ActionTypes.SaveRecipeError, new Error('Could not save the recipe.'))))
     }
 )
