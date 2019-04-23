@@ -53,9 +53,8 @@ export const fetchRecipes = (): ThunkResult<Promise<RecipeActions>> => (
 )
 
 export const editRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
-    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
-        const recipes = getState().recipes.recipes
-        return updateRecipe(recipes, recipe)
+    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>) => {
+        return updateRecipe(recipe)
             .then(() => dispatch(recipeSaved(recipe)))
             .then(() => dispatch(success(ActionTypes.SaveRecipeOk, 'Recipe saved.')))
             .catch(() => dispatch(error(ActionTypes.SaveRecipeError, new Error('Could not save the recipe.'))))
@@ -63,9 +62,8 @@ export const editRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> 
 )
 
 export const addRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
-    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
-        const recipes = getState().recipes.recipes
-        return submitRecipe(recipes, recipe)
+    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>) => {
+        return submitRecipe(recipe)
             .then(r => dispatch(recipeAdded(r)))
             .then(() => dispatch(success(ActionTypes.AddRecipeOk, 'Recipe added.')))
             .catch(() => dispatch(error(ActionTypes.SaveRecipeError, new Error('Could not save the recipe.'))))
@@ -73,9 +71,8 @@ export const addRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> =
 )
 
 export const deleteRecipe = (recipe: Recipe): ThunkResult<Promise<RecipeActions>> => (
-    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>, getState) => {
-        const recipes = getState().recipes.recipes
-        return removeRecipe(recipes, recipe)
+    (dispatch: ThunkDispatch<RootState, {}, RecipeActions>) => {
+        return removeRecipe(recipe)
             .then(() => dispatch(recipeDeleted(recipe)))
             .then(() => dispatch(success(ActionTypes.DeleteRecipeOk, 'Recipe removed.')))
             .catch(() => dispatch(error(ActionTypes.DeleteRecipeError, new Error('Could not remove the recipe.'))))
