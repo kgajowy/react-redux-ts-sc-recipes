@@ -16,26 +16,29 @@ const Ingredient: React.FunctionComponent<Props> = ({ingredient, onChange, onDel
 
     return (
         // div, otherwise applies flex from parent
-        <Container>
-            <Input
-                defaultValue={ingredient.name}
-                autoSave
-                onSubmit={(value) => {
-                    ingredient.name = value
-                    onChange(ingredient)
-                }}
-                inputProps={{
-                    placeholder: 'Ingredient name...',
-                }}
-            />
+        <div>
+            <Container>
+                <Input
+                    defaultValue={ingredient.name}
+                    autoSave
+                    onSubmit={(value) => {
+                        ingredient.name = value
+                        onChange(ingredient)
+                    }}
+                    inputProps={{
+                        placeholder: 'Ingredient name...',
+                    }}
+                />
+                <Remove onClick={() => onDelete(ingredient)}/>
+            </Container>
+
             <Checkbox type='checkbox' checked={required} onChange={(e) => {
                 switchRequired(e.target.checked)
                 ingredient.required = e.target.checked
                 onChange(ingredient)
             }}/>
             <CheckboxLabel>Required?</CheckboxLabel>
-            <Remove onClick={() => onDelete(ingredient)}/>
-        </Container>
+        </div>
     )
 }
 

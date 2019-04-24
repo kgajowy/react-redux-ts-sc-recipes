@@ -1,12 +1,11 @@
 import React, {FunctionComponent, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {addRecipe, deleteRecipe, editRecipe, fetchRecipes} from '../actions/recipes.actions'
-import {Remove} from '../components/remove/Remove'
 import {Recipe as RecipeType} from '../interfaces/recipe'
 import {AppThunkDispatch} from '../interfaces/thunk'
 import {RootState} from '../reducers'
 import {NewRecipe} from './NewRecipe'
-import Recipe from './Recipe'
+import {Recipes} from './Recipes'
 
 interface StateProps {
     recipes: RecipeType[]
@@ -24,24 +23,19 @@ const RecipeContainer: FunctionComponent<StateProps & DispatchProps> = ({recipes
         async function trigger() {
             await fetch()
         }
+
         trigger()
     }, [])
     return (
-        <div>
+        <>
             <h1>New Recipe:</h1>
             <NewRecipe add={add}/>
             <h1>Collection of Recipes:</h1>
-            {
-                recipes.map(r =>
-                    <Recipe key={r.id}
-                            recipe={r}
-                            onChange={edit}
-                            removeElement={<Remove onClick={() => remove(r)}/>}/>
-                )
-            }
-        </div>
+            <Recipes edit={edit} remove={remove} recipes={recipes}/>
+        </>
     )
 }
+
 
 const mapStateToProps = ({recipes: {recipes}}: RootState): StateProps => ({
     recipes,
