@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import {InputUi} from '../components'
 import {Input} from '../components/input/Input'
 import Ingredient from '../ingredient/Ingredient'
 import {NewIngredient} from '../ingredient/NewIngredient'
 import {Ingredient as IngredientType} from '../interfaces/ingredient'
 import {Recipe as RecipeProps} from '../interfaces/recipe'
+import {uniq, uniqueId} from 'lodash-es'
 
 interface Props {
     recipe: RecipeProps
@@ -32,7 +32,7 @@ const Recipe: React.FunctionComponent<Props> = ({onChange, recipe, removeElement
             <List>
                 <NewIngredient add={ingredientAdded}/>
                 {recipe.ingredients.map((ing) =>
-                    <Ingredient key={ing.id} ingredient={ing} onChange={ingredientChange}/>)}
+                    <Ingredient key={uniqueId(ing.name)} ingredient={ing} onChange={ingredientChange}/>)}
             </List>
         </div>
     )
@@ -44,16 +44,10 @@ const List = styled.div`
   padding: 0 0 30px 30px;
 `
 
-const Name = styled(InputUi)`
-  font-size: 2rem;
-  height: 2.5rem;
-  
-`
-
 export default Recipe
 
-// TODO add ingredient removal button
-// TODO add debounce to InputUi
-// TODO add 'Enter' keypress to InputUi
+// TODO replace Ingredient Input with SuperInput
 // TODO replace all inputs with InputUi (move useXXX from Recipe to InputUi)
+// TODO add ingredient removal button
+// TODO styling !
 // TODO RWD

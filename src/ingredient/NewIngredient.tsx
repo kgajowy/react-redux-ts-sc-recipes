@@ -7,5 +7,9 @@ interface Props {
 }
 
 export const NewIngredient: React.FunctionComponent<Props> = ({add}) => <Input
-    onSubmit={(name: string) => add({name} as Ingredient)}/>
+    onSubmit={(name: string) => add({name} as Ingredient)} clearAfterSubmit
+    inputProps={{
+        placeholder: 'Type new ingredient name...'
+    }}
+/>
 
