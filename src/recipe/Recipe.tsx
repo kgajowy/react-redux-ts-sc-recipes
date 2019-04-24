@@ -64,8 +64,3 @@ const RecipeNameContainer = styled.div`
 
 export default Recipe
 
-// TODO replace Ingredient Input with SuperInput
-// TODO replace all inputs with InputUi (move useXXX from Recipe to InputUi)
-// TODO add ingredient removal button
-// TODO styling !
-// TODO RWD
