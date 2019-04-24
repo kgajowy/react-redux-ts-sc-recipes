@@ -24,10 +24,12 @@ https://kgajowy.github.io/react-redux-ts-sc-recipes/
 * React Hooks (-Ref, -Callback, -State, -Effect)
 * debounce with Hooks
 
-# Stuff I wanted but didn't manage to add / key notes
+# Stuff I wanted but didn't manage to add / key notes / improvement areas
 * FaC in a better way
 * StyledComponents selectors
 * jest/enzyme
 * Toasts for actions success/failure
 * having time for TDD - need to practice this more!
 * reselect for picking which ingredients you have to show 'available' recipes
+* more Styles showcase
+* media queries
